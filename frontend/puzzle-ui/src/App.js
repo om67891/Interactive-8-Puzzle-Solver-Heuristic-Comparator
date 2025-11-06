@@ -437,9 +437,6 @@ function App() {
         >
           Need Help?
         </button>
-        <div className="footer-info">
-          Built with React & Flask | 8-Puzzle AI Solver
-        </div>
       </footer>
     </div>
   );

@@ -1,13 +1,21 @@
 import axios from 'axios';
 
-const API_BASE = 'http://127.0.0.1:5000/api';
+// Use Render backend in production, local in development
+const API_BASE = process.env.NODE_ENV === 'production' 
+  ? 'https://interactive-8-puzzle-solver-heuristic.onrender.com/api' 
+  : 'https://interactive-8-puzzle-solver-heuristic.onrender.com/api';
 
 export const solvePuzzle = async (start, goal, algorithm, heuristic) => {
-  const response = await axios.post(`${API_BASE}/solve`, {
-    start,
-    goal,
-    algorithm,
-    heuristic,
-  });
-  return response.data;
+  try {
+    const response = await axios.post(`${API_BASE}/solve`, {
+      start,
+      goal,
+      algorithm,
+      heuristic,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw error;
+  }
 };
