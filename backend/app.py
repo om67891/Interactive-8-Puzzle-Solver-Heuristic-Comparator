@@ -1,4 +1,3 @@
-# backend/app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from solver.search import astar, best_first
@@ -26,5 +25,9 @@ def solve_puzzle():
     result = solver_fn(start, goal, heuristic)
     return jsonify(result)
 
+@app.route("/", methods=["GET"])
+def health_check():
+    return jsonify({"status": "healthy", "message": "8-Puzzle Solver API is running"})
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
